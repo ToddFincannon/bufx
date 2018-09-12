@@ -1,5 +1,6 @@
 const fs = require('fs')
 const R = require('ramda')
+const yaml = require('js-yaml')
 const prettier = require('prettier')
 
 // Numeric value of a string or number
@@ -40,6 +41,23 @@ let printJson = o => {
 let writeJson = (o, pathname) => {
   write(JSON.stringify(o), pathname)
 }
+// Print an array or object as YAML
+let printYaml = o => {
+  print(yaml.dump(o))
+}
+// Parse a YAMl string into an object.
+let loadYaml = s => {
+  return yaml.load(s)
+}
+// Read a YAML file into an array or object.
+let readYaml = pathname => {
+  let s = read(pathname)
+  return loadYaml(s)
+}
+// Write an array or object as YAML to a file
+let writeYaml = (o, pathname) => {
+  write(yaml.dump(o), pathname)
+}
 
 // Output buffer
 let bufs = { _: '' }
@@ -68,8 +86,14 @@ let emitPrettyJson = (o, channel = null) => {
 }
 // Emit a JavaScript string to a buffer with formatting
 let emitJs = (js, opts = null) => {
-  let options = opts || { semi: false, singleQuote: true }
-  emit(prettier.format(js, options))
+  let options = opts || { semi: false, singleQuote: true, parser: 'babylon' }
+  let s = prettier.format(js, options)
+  emit(s)
+}
+// Emit an object to a buffer as YAML
+let emitYaml = (o, channel = null) => {
+  channel = channel || '_'
+  bufs[channel] += yaml.dump(o)
 }
 // Print a buffer to the console
 let printBuf = (channel = null) => {
@@ -99,8 +123,10 @@ module.exports = {
   emitJson,
   emitLine,
   emitPrettyJson,
+  emitYaml,
   getBuf,
   lines,
+  loadYaml,
   num,
   open,
   pr,
@@ -108,12 +134,15 @@ module.exports = {
   printa,
   printBuf,
   printJson,
+  printYaml,
   printu,
   read,
+  readYaml,
   sorta,
   sortn,
   sortu,
   write,
   writeBuf,
-  writeJson
+  writeJson,
+  writeYaml
 }
