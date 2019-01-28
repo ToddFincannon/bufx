@@ -1,4 +1,4 @@
-The bufx library contains various utility functions that read and write line-oriented string buffers. These functions are particularly useful for emitting output a bit at a time, and then writing them or printing them to the console. JSON and JavaScript are supported. You can split your output into multiple channels going to separate buffers, or work with one default buffer. Please refer to the `bufx.js` source file for details about function arguments.
+The bufx library contains various utility functions that read and write line-oriented string buffers. These functions are particularly useful for emitting output a bit at a time, and then writing them or printing them to the console. JSON, YAML, and JavaScript are supported. You can split your output into multiple channels going to separate buffers, or work with one default buffer. Please refer to the `bufx.js` source file for details about function arguments.
 
 | Function name  | What it does                                                          |
 |----------------|:----------------------------------------------------------------------|
@@ -11,7 +11,7 @@ The bufx library contains various utility functions that read and write line-ori
 | emitYaml       | Emit an object to a buffer as YAML                                    |
 | getBuf         | Get buffer contents as a string                                       |
 | lines          | Split a string into lines that may have Windows or Unix line endings  |
-| loadYaml       | Parse a YAMl string into an object                                    |
+| loadYaml       | Parse a YAML string into an object                                    |
 | num            | Numeric value of a string or number                                   |
 | open           | Open a buffer for writing                                             |
 | pr             | Print a string to the console                                         |

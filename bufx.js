@@ -86,7 +86,7 @@ let emitPrettyJson = (o, channel = null) => {
 }
 // Emit a JavaScript string to a buffer with formatting
 let emitJs = (js, opts = null) => {
-  let options = opts || { semi: false, singleQuote: true, parser: 'babylon' }
+  let options = opts || { semi: false, singleQuote: true, parser: 'babel' }
   let s = prettier.format(js, options)
   emit(s)
 }
