@@ -2,6 +2,7 @@ const fs = require('fs')
 const R = require('ramda')
 const yaml = require('js-yaml')
 const prettier = require('prettier')
+const stripBom = require('strip-bom')
 
 // Numeric value of a string or number
 let num = x => (typeof x === 'number' ? x : Number.parseFloat(x))
@@ -19,16 +20,16 @@ let sortu = a => R.sort(acmp, R.uniq(a))
 let printa = a => R.forEach(x => print(x), a)
 // Print a sorted, unique array
 let printu = a => printa(sortu(a))
-// Split a string into lines that may have Windows or Unix line endings.
-let lines = s => s.split(/\r?\n/)
+// Split a string into lines that may have Windows, Unix, or old Mac line endings.
+let lines = s => s.split(/\r\n|\n|\r/)
 // Print a string to the console
 let print = s => {
   console.log(s)
 }
 // Print a string to the console
 let pr = print
-// Read a UTF-8 file into a string
-let read = pathname => fs.readFileSync(pathname, 'utf8')
+// Read a UTF-8 file into a string. Strip the BOM if present.
+let read = pathname => stripBom(fs.readFileSync(pathname, 'utf8'))
 // Write a string to a UTF-8 file
 let write = (s, pathname) => {
   fs.writeFileSync(pathname, s, { encoding: 'utf8' })

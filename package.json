@@ -1,6 +1,6 @@
 {
   "name": "bufx",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Utility functions to read and write string buffers",
   "author": "Todd Fincannon <todd@toddfincannon.com> (http://toddfincannon.com)",
   "homepage": "http://toddfincannon.com",
@@ -15,8 +15,9 @@
   },
   "main": "bufx.js",
   "dependencies": {
-    "js-yaml": "^3.12.0",
-    "prettier": "^1.16.0",
-    "ramda": "^0.26.0"
+    "js-yaml": "^3.12.1",
+    "prettier": "^1.16.4",
+    "ramda": "^0.26.0",
+    "strip-bom": "^3.0.0"
   }
 }
